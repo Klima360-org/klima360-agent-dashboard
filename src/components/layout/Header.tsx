@@ -1,4 +1,4 @@
-import { Leaf, LogOut, Menu } from 'lucide-react';
+import { Clover, Leaf, LogOut, Menu } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useAuth } from '@/contexts/AuthContext';
 import { useLocation, Link } from 'react-router-dom';
@@ -30,10 +30,8 @@ export const Header = ({ onMenuClick, showMenuButton = false }: HeaderProps) => 
             )}
             
             <Link to="/" className="flex items-center gap-2">
-              <div className="w-8 h-8 bg-gradient-primary rounded-lg flex items-center justify-center">
-                <Leaf className="h-5 w-5 text-primary-foreground" />
-              </div>
-              <span className="text-xl font-bold text-foreground">Klima360</span>
+              <img src="/apple-touch-icon.png" alt="Klima360" className="h-8 w-8" />
+              <span className="text-xl font-bold text-primary">Klima360</span>
             </Link>
           </div>
 

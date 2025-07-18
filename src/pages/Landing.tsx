@@ -154,9 +154,7 @@ export const Landing = () => {
       <footer className="bg-foreground text-background py-8">
         <div className="container mx-auto px-4 text-center">
           <div className="flex items-center justify-center gap-2 mb-4">
-            <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
-              <Leaf className="h-5 w-5 text-primary-foreground" />
-            </div>
+          <img src="/apple-touch-icon.png" alt="Klima360" className="h-8 w-8" />
             <span className="text-xl font-bold">Klima360</span>
           </div>
           <p className="text-background/70 mb-4">
