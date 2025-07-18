@@ -46,10 +46,8 @@ export const Login = () => {
       <div className="container mx-auto px-4 py-6">
         <div className="flex items-center justify-between">
           <Link to="/" className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-gradient-primary rounded-lg flex items-center justify-center">
-              <Leaf className="h-5 w-5 text-primary-foreground" />
-            </div>
-            <span className="text-xl font-bold text-foreground">Klima360</span>
+          <img src="/apple-touch-icon.png" alt="Klima360" className="h-8 w-8" />
+            <span className="text-xl font-bold text-primary">Klima360</span>
           </Link>
           
           <Link to="/" className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors">
