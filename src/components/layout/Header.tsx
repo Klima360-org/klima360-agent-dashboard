@@ -1,21 +1,25 @@
-import { Clover, Leaf, LogOut, Menu } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { useAuth } from '@/contexts/AuthContext';
-import { useLocation, Link } from 'react-router-dom';
+import { Button } from "@/components/ui/button";
+import { useAuth } from "@/contexts/AuthContext";
+import { LogOut, Menu } from "lucide-react";
+import { Link, useLocation } from "react-router-dom";
+import logo from "@/assets/logo.png";
 
 interface HeaderProps {
   onMenuClick?: () => void;
   showMenuButton?: boolean;
 }
 
-export const Header = ({ onMenuClick, showMenuButton = false }: HeaderProps) => {
+export const Header = ({
+  onMenuClick,
+  showMenuButton = false,
+}: HeaderProps) => {
   const { agent, logout, isAuthenticated } = useAuth();
   const location = useLocation();
-  const isLanding = location.pathname === '/';
+  const isLanding = location.pathname === "/";
 
   return (
     <header className="bg-card border-b border-border shadow-soft sticky top-0 z-50">
-      <div className="container mx-auto px-4 py-3">
+      <div className="container mx-auto px-4 py-2">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-4">
             {showMenuButton && (
@@ -28,10 +32,13 @@ export const Header = ({ onMenuClick, showMenuButton = false }: HeaderProps) => 
                 <Menu className="h-5 w-5" />
               </Button>
             )}
-            
+
             <Link to="/" className="flex items-center gap-2">
-              <img src="/apple-touch-icon.png" alt="Klima360" className="h-8 w-8" />
-              <span className="text-xl font-bold text-primary">Klima360</span>
+              <img
+                src={logo}
+                alt="Logo"
+                className="w-20 h-full object-cover logo"
+              />
             </Link>
           </div>
 
@@ -39,7 +46,10 @@ export const Header = ({ onMenuClick, showMenuButton = false }: HeaderProps) => 
             {isAuthenticated && agent ? (
               <>
                 <div className="hidden sm:block text-sm text-muted-foreground">
-                  Welcome, <span className="font-medium text-foreground">{agent.name}</span>
+                  Welcome,{" "}
+                  <span className="font-medium text-foreground">
+                    {agent.name}
+                  </span>
                 </div>
                 <Button
                   variant="outline"

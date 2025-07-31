@@ -5,7 +5,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Link } from 'react-router-dom';
 import { Header } from '@/components/layout/Header';
-import heroImage from '@/assets/hero-agriculture.jpg';
+import logo from '@/assets/logo-white.png';
 
 export const Landing = () => {
   return (
@@ -154,8 +154,8 @@ export const Landing = () => {
       <footer className="bg-foreground text-background py-8">
         <div className="container mx-auto px-4 text-center">
           <div className="flex items-center justify-center gap-2 mb-4">
-          <img src="/apple-touch-icon.png" alt="Klima360" className="h-8 w-8" />
-            <span className="text-xl font-bold">Klima360</span>
+          <img src={logo} alt="Klima360" className="h-full w-20 object-cover" />
+           
           </div>
           <p className="text-background/70 mb-4">
             Building resilient agricultural communities across Africa

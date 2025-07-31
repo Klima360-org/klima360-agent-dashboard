@@ -7,6 +7,7 @@ import { Label } from '@/components/ui/label';
 import { Leaf, ArrowLeft } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
 import { Agent } from '@/types';
+import logo from '@/assets/logo.png';
 
 export const Login = () => {
   const navigate = useNavigate();
@@ -42,20 +43,7 @@ export const Login = () => {
 
   return (
     <div className="min-h-screen bg-gradient-earth flex flex-col">
-      {/* Header */}
-      <div className="container mx-auto px-4 py-6">
-        <div className="flex items-center justify-between">
-          <Link to="/" className="flex items-center gap-2">
-          <img src="/apple-touch-icon.png" alt="Klima360" className="h-8 w-8" />
-            <span className="text-xl font-bold text-primary">Klima360</span>
-          </Link>
-          
-          <Link to="/" className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors">
-            <ArrowLeft className="h-4 w-4" />
-            Back to Home
-          </Link>
-        </div>
-      </div>
+   
 
       {/* Login Form */}
       <div className="flex-1 flex items-center justify-center px-4">
