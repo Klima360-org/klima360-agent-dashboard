@@ -10,18 +10,19 @@ import { useAuth } from '@/contexts/AuthContext';
 import { useData } from '@/contexts/DataContext';
 import { ScoreBadge } from '@/components/farmer/ScoreBadge';
 import { format } from 'date-fns';
+import { useUser } from '@clerk/clerk-react';
 
 export const FarmersList = () => {
-  const { agent } = useAuth();
+  const { user } = useUser();
   const { getFarmersByAgent } = useData();
   
   const [searchQuery, setSearchQuery] = useState('');
   const [scoreBandFilter, setScoreBandFilter] = useState('all');
   const [locationFilter, setLocationFilter] = useState('all');
 
-  if (!agent) return null;
+  if (!user) return null;
 
-  const allFarmers = getFarmersByAgent(agent.id);
+  const allFarmers = getFarmersByAgent(user.id);
   
   // Get unique locations for filter
   const uniqueLocations = [...new Set(allFarmers.map(f => f.county))].sort();
