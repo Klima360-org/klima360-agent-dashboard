@@ -17,7 +17,7 @@ export const DashboardLayout = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background font-sans">
       <Header onMenuClick={toggleMobileMenu} showMenuButton={true} />
       
       <div className="flex">
