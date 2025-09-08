@@ -9,7 +9,7 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --font-manrope: "Manrope", sans-serif;
+    --font-sans: "Outfit", sans-serif;
     /* Earth-friendly color palette for Klima360 */
     --background: 120 15% 97%;
     --foreground: 140 20% 12%;
@@ -120,6 +120,7 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans;
   }
 }
+
