@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
-import { useAuth } from "@/contexts/AuthContext";
 import { LogOut, Menu } from "lucide-react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useClerk, useUser, SignedIn, SignedOut, UserButton } from "@clerk/clerk-react";
 import logo from "@/assets/logo.png";
 
 interface HeaderProps {
@@ -13,14 +13,22 @@ export const Header = ({
   onMenuClick,
   showMenuButton = false,
 }: HeaderProps) => {
-  const { agent, logout, isAuthenticated } = useAuth();
+  const { user, isSignedIn } = useUser();
+  const { signOut } = useClerk();
   const location = useLocation();
+  const navigate = useNavigate();
   const isLanding = location.pathname === "/";
 
+  const handleLogout = async () => {
+    await signOut();
+    navigate("/login");
+  };
+
   return (
-    <header className="bg-card border-b border-border shadow-soft sticky top-0 z-50">
+    <header className="bg-card/75 border-b border-border shadow-soft sticky top-0 z-50">
       <div className="container mx-auto px-4 py-2">
         <div className="flex items-center justify-between">
+          {/* Left side */}
           <div className="flex items-center gap-4">
             {showMenuButton && (
               <Button
@@ -42,32 +50,36 @@ export const Header = ({
             </Link>
           </div>
 
+          {/* Right side */}
           <div className="flex items-center gap-4">
-            {isAuthenticated && agent ? (
-              <>
-                <div className="hidden sm:block text-sm text-muted-foreground">
-                  Welcome,{" "}
-                  <span className="font-medium text-foreground">
-                    {agent.name}
-                  </span>
-                </div>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={logout}
-                  className="flex items-center gap-2"
-                >
-                  <LogOut className="h-4 w-4" />
-                  <span className="hidden sm:inline">Logout</span>
-                </Button>
-              </>
-            ) : isLanding ? (
-              <Link to="/login">
-                <Button variant="default" size="sm">
-                  Agent Login
-                </Button>
-              </Link>
-            ) : null}
+            <SignedIn>
+              <div className="hidden sm:block text-sm text-muted-foreground">
+                Welcome,{" "}
+                <span className="font-medium text-foreground">
+                  {user?.firstName || user?.username || "Agent"}
+                </span>
+              </div>
+              <UserButton/>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={handleLogout}
+                className="flex items-center gap-2"
+              >
+                <LogOut className="h-4 w-4" />
+                <span className="hidden sm:inline">Logout</span>
+              </Button>
+            </SignedIn>
+
+            <SignedOut>
+              {isLanding && (
+                <Link to="/login">
+                  <Button variant="default" size="sm">
+                    Agent Login
+                  </Button>
+                </Link>
+              )}
+            </SignedOut>
           </div>
         </div>
       </div>
