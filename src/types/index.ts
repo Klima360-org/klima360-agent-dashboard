@@ -15,12 +15,12 @@ export interface Farmer {
   name: string;
   phone: string;
   county: string;
-  subCounty: string;
+  subCounty?: string;
   village: string;
   gpsCoordinates?: string;
   farmSize: number;
   farmingType: 'crop' | 'livestock' | 'mixed';
-  mainCrops: string;
+  mainCrops?: string;
   dateEnrolled: string;
   agentId: string;
   agentName: string;

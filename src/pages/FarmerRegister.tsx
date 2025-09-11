@@ -23,22 +23,9 @@ import { Textarea } from "@/components/ui/textarea";
 import { MapPin, Save } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
 import { useData } from "@/contexts/DataContext";
+import { Farmer } from "@/types";
 
-interface Farmer {
-  id: string;
-  name: string;
-  phone: string;
-  county: string;
-  subCounty?: string;
-  village: string;
-  gpsCoordinates?: string;
-  farmSize: number;
-  farmingType: "crop" | "livestock" | "mixed";
-  mainCrops?: string;
-  dateEnrolled: string;
-  agentId: string;
-  agentName: string;
-}
+// Use shared Farmer type from src/types
 
 export const FarmerRegister = () => {
   const navigate = useNavigate();
