@@ -25,7 +25,7 @@ export interface Farmer {
   agentId: string;
   agentName: string;
   climateScore?: number;
-  scoreBand?: 'critical' | 'moderate' | 'strong';
+  scoreBand?: 'veryCritical' | 'low' | 'moderate' | 'good' | 'excellent';
   matchedProduct?: Product;
 }
 
@@ -33,7 +33,7 @@ export interface Product {
   id: string;
   title: string;
   description: string;
-  scoreBand: 'critical' | 'moderate' | 'strong';
+  scoreBand: 'veryCritical' | 'low' | 'moderate' | 'good' | 'excellent';
 }
 
 export interface ClimateScoreAnswers {
@@ -73,7 +73,8 @@ export interface ClimateScoreAnswers {
 
 export interface ClimateScoreResult {
   totalScore: number;
-  scoreBand: 'critical' | 'moderate' | 'strong';
+  scoreBand: 'veryCritical' | 'low' | 'moderate' | 'good' | 'excellent';
+
   categoryScores: {
     exposure: number;
     sensitivity: number;

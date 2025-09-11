@@ -6,13 +6,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import {
-  Users,
-  UserPlus,
-  TrendingUp,
-  Target,
-  ArrowRight,
-} from "lucide-react";
+import { Users, UserPlus, TrendingUp, Target, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useUser } from "@clerk/clerk-react";
 import { useData } from "@/contexts/DataContext";
@@ -30,16 +24,30 @@ export const Dashboard = () => {
   const myFarmers = getFarmersByAgent(user.id);
 
   const scoredFarmers = myFarmers.filter((f) => f.climateScore !== undefined);
-  const criticalFarmers = scoredFarmers.filter(
-    (f) => f.scoreBand === "critical"
-  ).length;
-  const moderateFarmers = scoredFarmers.filter(
-    (f) => f.scoreBand === "moderate"
-  ).length;
-  const strongFarmers = scoredFarmers.filter(
-    (f) => f.scoreBand === "strong"
-  ).length;
+  // Count farmers by band dynamically
+  const bandCounts: Record<string, number> = {
+    veryCritical: 0,
+    low: 0,
+    moderate: 0,
+    good: 0,
+    excellent: 0,
+  };
 
+  scoredFarmers.forEach((f) => {
+    if (f.scoreBand) {
+      bandCounts[f.scoreBand] += 1;
+    }
+  });
+
+  // Build scoreDistribution for chart
+  const scoreDistribution = [
+    { name: "Very Critical", value: bandCounts.veryCritical, color: "bg-red-500" },
+    { name: "Low", value: bandCounts.low, color: "bg-orange-500" },
+    { name: "Moderate", value: bandCounts.moderate, color: "bg-yellow-500" },
+    { name: "Good", value: bandCounts.good, color: "bg-green-500" },
+    { name: "Excellent", value: bandCounts.excellent, color: "bg-blue-500" },
+  ];
+  
   return (
     <div className="space-y-6 font-sans">
       {/* Welcome Header */}
@@ -91,21 +99,14 @@ export const Dashboard = () => {
           </CardHeader>
           <CardContent>
             <div className="grid grid-cols-3 gap-4">
-              <DistBox
-                count={criticalFarmers}
-                label="Critical Risk"
-                color="score-critical"
-              />
-              <DistBox
-                count={moderateFarmers}
-                label="Moderate Risk"
-                color="score-moderate"
-              />
-              <DistBox
-                count={strongFarmers}
-                label="Strong Resilience"
-                color="score-strong"
-              />
+              {scoreDistribution.map((band, index) => (
+                <DistBox
+                  key={index}
+                  count={band.value}
+                  label={band.name}
+                  color={band.color}
+                />
+              ))}
             </div>
           </CardContent>
         </Card>
@@ -199,7 +200,9 @@ const StatCard = ({
   <Card>
     <CardContent className="p-4">
       <div className="flex items-center gap-3">
-        <div className={`w-10 h-10 ${bg} rounded-lg flex items-center justify-center`}>
+        <div
+          className={`w-10 h-10 ${bg} rounded-lg flex items-center justify-center`}
+        >
           {icon}
         </div>
         <div>

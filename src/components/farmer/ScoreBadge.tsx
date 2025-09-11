@@ -3,7 +3,7 @@ import { getScoreBandColor, getScoreBandLabel } from '@/utils/scoring';
 
 interface ScoreBadgeProps {
   score: number;
-  scoreBand: 'critical' | 'moderate' | 'strong';
+  scoreBand: 'veryCritical' | 'low' | 'moderate' | 'good' | 'excellent';
   size?: 'sm' | 'md' | 'lg';
 }
 
